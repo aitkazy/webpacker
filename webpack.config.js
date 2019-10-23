@@ -12,7 +12,8 @@ module.exports = {
 	devServer: {
 		contentBase: path.join(__dirname, "public"),
 		port: 3000,
-		publicPath: path.resolve(__dirname, "/")
+		publicPath: "/",
+		open: true
 	},
 	plugins: [
 		new CleanWebpackPlugin(),
@@ -24,8 +25,22 @@ module.exports = {
 	module: {
 		rules: [
 			{
+				test: /\.m?js$/,
+				exclude: /(node_modules|bower_components)/,
+				use: {
+					loader: "babel-loader",
+					options: {
+						presets: ["@babel/preset-env", "@babel/preset-react"]
+					}
+				}
+			},
+			{
 				test: /\.css$/,
 				use: ["style-loader", "css-loader"]
+			},
+			{
+				test: /\.s[ac]ss$/i,
+				use: ["style-loader", "css-loader", "sass-loader"]
 			},
 			{
 				test: /\.(png|svg|jpg|gif)$/,
