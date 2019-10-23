@@ -1,17 +1,12 @@
-import React, { Component } from "react";
-import "./style.scss";
+import React from "react";
+import "./app.scss";
 
-export class App extends Component {
-	componentDidMount = () => {
-		console.log("mounted");
-		this.deepHouse();
-	};
-
-	deepHouse = () => {};
-
-	render() {
-		return <div className="hello">App</div>;
-	}
-}
+const App = () => {
+	return (
+		<div className="se-container">
+			<div className="se-label">SE React starter</div>
+		</div>
+	);
+};
 
 export default App;
