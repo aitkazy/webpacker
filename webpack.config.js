@@ -3,16 +3,24 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
-	entry: {
-		app: "./src/index.js",
-		print: "./src/print.js"
-	},
+	entry: "./src/index.js",
 	output: {
-		filename: "[name].bundle.js",
-		path: path.resolve(__dirname, "dist"),
+		filename: "[name].[hash].js",
+		path: path.resolve(__dirname, "build"),
 		publicPath: "./"
 	},
-	plugins: [new CleanWebpackPlugin(), new HtmlWebpackPlugin()],
+	devServer: {
+		contentBase: path.join(__dirname, "public"),
+		port: 3000,
+		publicPath: path.resolve(__dirname, "/")
+	},
+	plugins: [
+		new CleanWebpackPlugin(),
+		new HtmlWebpackPlugin({
+			template: "./public/htmlTemplate.html",
+			filename: "index.html"
+		})
+	],
 	module: {
 		rules: [
 			{
